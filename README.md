@@ -50,3 +50,14 @@ Infect reads your `.vimrc` file and looks for magic comments. It uses those to i
 
 Just put those lines at the top of your vimrc and infect will install pathogen and the bundles for you.
 
+### Pre- and Post-Hooks
+
+There's an additional command available for pre- and post-hooks.
+
+    "=bundle Valloric/YouCompleteMe after=( cd YouCompleteMe && git submodule update --init --recursive && ./install.sh ), before=echo "Unicorns use Vim"
+
+The above syntax will print "Unicorns use Vim" to the screen before installing 'YouCompleteMe'.  After it's installed/updated, the post-hook kicks in and runs that shell command to finish secondary install steps.
+
+The following are the available hooks: before (before both update/install), after (after both update/install), after_install (only after the original install).
+
+Note: The before/after hooks will set the current working directory (PWD) to your bundle folder, ie `~/.vim/bundle/`. Plan accordingly in your shell scripts.
